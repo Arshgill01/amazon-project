@@ -6,13 +6,18 @@ import { loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 // async -- a better way to work with promises ; makes a function return a promise.
-
+// So we're talking about creating errors ourselves -- there are 2 ways -
+// using 'throw'
+// if we want to throw an error in the future -- use reject, instead. -- coz throw does not work in the future.
+//
+// reject-- second parameter offered by promises. - lets us create an error in the future.
 async function loadPage() {
   try {
     console.log("load page");
     await loadProductsFetch();
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
       loadCart(() => {
+        //reject("error2");
         resolve();
       });
     });
